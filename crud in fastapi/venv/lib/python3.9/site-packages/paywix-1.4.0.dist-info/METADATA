@@ -1,0 +1,64 @@
+Metadata-Version: 2.1
+Name: paywix
+Version: 1.4.0
+Summary: Paywix is a light weight payment processing sdk for python based applications.
+Home-page: https://github.com/renjithsraj/paywix
+Author: Renjith S Raj
+Author-email: renjithsraj@live.com
+Maintainer: Renjith S Raj
+Maintainer-email: renjithsraj@live.com
+License: UNKNOWN
+Keywords: payment processing,payu,python payment gateway wrapper,cashfree,paytm,etc
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+
+# PAYWIX
+
+Paywix is a lightweight SDK for payment processing for the python based applications, the package 
+was initially supported only with the Django framework. In the new version, the package is supported 
+by all python-based applications.
+
+### Currently supported Payment Gateways
+  - Payu
+
+### Installation
+* Python > 3 Version
+
+```python
+1. pip install paywix
+2. pipenv install paywix
+```
+
+### Plugins
+
+Paywix is currently extended with the following plugins. Instructions on how to use them in your own application are detailed below.
+
+| Plugin | README |
+| ------ | ------ |
+| PAYU | https://github.com/renjithsraj/paywix/blob/master/PAYU.md|
+|------|----------------------------------------------------------|
+| PAYTM | https://github.com/renjithsraj/paywix/blob/master/PAYTM.md|
+
+### Todos
+ - Cashfree
+ - Stripe
+ - Braintree
+ - CCavenue
+
+License
+----
+
+MIT
+
+
+
