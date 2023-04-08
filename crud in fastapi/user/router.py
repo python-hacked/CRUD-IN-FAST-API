@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Request, Form, status, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
-from . models import*
+from . models import *
 from passlib.context import CryptContext
 from fastapi_login import LoginManager
 import uuid
 import typing
+import passlib
 
 router = APIRouter()
 SECRET = 'your-secret-key'
@@ -26,14 +27,17 @@ def get_password_hash(password):
 def flash(request: Request, message: typing.Any, category: str = "") -> None:
     if "_messages" not in request.session:
         request.session["_messages"] = []
-    request.session["_messages"].append({"message": message, "category": category})
+    request.session["_messages"].append(
+        {"message": message, "category": category})
 
 
 def get_flashed_messages(request: Request):
     print(request.session)
     return request.session.pop("_messages") if "_messages" in request.session else []
 
+
 templates.env.globals['get_flashed_messages'] = get_flashed_messages
+
 
 @router.get("/", response_class=HTMLResponse)
 async def read_item(request: Request):
@@ -47,18 +51,18 @@ async def read_item(request: Request, full_name: str = Form(...),
                     Email: str = Form(...),
                     Phone: str = Form(...),
                     Password: str = Form(...)):
-    if await  User.filter(email=Email).exists():
+    if await User.filter(email=Email).exists():
         flash(request, "Email alrady ragister")
         return RedirectResponse("/", status_code=status.HTTP_302_FOUND)
-        
-    elif await  User.filter(phone=Phone).exists():
+
+    elif await User.filter(phone=Phone).exists():
         flash(request, "Phone number alrady ragister")
         return RedirectResponse("/", status_code=status.HTTP_302_FOUND)
-            
-    else:    
+
+    else:
         user_obj = await User.create(email=Email, name=full_name,
-                                 phone=Phone,
-                                 password=get_password_hash(Password))
+                                     phone=Phone,
+                                     password=get_password_hash(Password))
         flash(request, "User sucessfull ragister")
         return RedirectResponse("/login/", status_code=status.HTTP_302_FOUND)
 
@@ -105,6 +109,7 @@ async def read_item(request: Request):
         "request": request,
     })
 
+
 @router.get("/table/", response_class=HTMLResponse)
 async def read_item(request: Request):
     persons = await User.all()
@@ -112,6 +117,7 @@ async def read_item(request: Request):
         "request": request,
         "persons": persons
     })
+
 
 @router.get("/update/{id}", response_class=HTMLResponse)
 async def read_item(request: Request, id: int):
@@ -121,8 +127,9 @@ async def read_item(request: Request, id: int):
         "person": person
     })
 
+
 @router.post("/update_detials/")
-async def update(request: Request, id: int= Form(...),
+async def update(request: Request, id: int = Form(...),
                  full_name: str = Form(...),
                  Email: str = Form(...),
                  Phone: str = Form(...),
@@ -133,6 +140,7 @@ async def update(request: Request, id: int= Form(...),
                                       phone=Phone
                                       )
     return RedirectResponse('/table/', status_code=status.HTTP_302_FOUND)
+
 
 @router.get("/delete/{id}", response_class=HTMLResponse)
 async def delete(request: Request, id: int):
