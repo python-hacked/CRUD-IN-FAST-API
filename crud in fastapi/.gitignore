@@ -1,8 +1,12 @@
-### dotenv ###
-.env
+__pycache__
+**__pycache__
+***__pycache__
+*__pycache__
+user/__pycache__
+migrations/
 venv
-.configs
-
-### Python ###
-# Byte-compiled / optimized / DLL files
-__pycache__/
+.vscode
+setting.py
+.vscode
+spaces
+.env

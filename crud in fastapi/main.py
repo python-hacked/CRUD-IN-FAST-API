@@ -11,6 +11,7 @@ from tortoise import fields
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.middleware import Middleware
 from configs.connection import DATABASE_URL
+from fastapi.middleware.cors import CORSMiddleware
 
 
 db_url = DATABASE_URL()
@@ -22,6 +23,24 @@ middleware = [
 app = FastAPI(middleware=middleware)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(UsersRoute.router)
+
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://192.168.1.101:8000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 JWT_SECRET = 'myjwtsecret'
