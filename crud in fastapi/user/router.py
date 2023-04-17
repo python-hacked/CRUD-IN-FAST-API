@@ -6,7 +6,6 @@ from passlib.context import CryptContext
 from fastapi_login import LoginManager
 import uuid
 import typing
-import passlib
 
 router = APIRouter()
 SECRET = 'your-secret-key'
@@ -60,9 +59,9 @@ async def read_item(request: Request, full_name: str = Form(...),
         return RedirectResponse("/", status_code=status.HTTP_302_FOUND)
 
     else:
-        user_obj = await User.create(email=Email, name=full_name,
-                                     phone=Phone,
-                                     password=get_password_hash(Password))
+        await User.create(email=Email, name=full_name,
+                          phone=Phone,
+                          password=get_password_hash(Password))
         flash(request, "User sucessfull ragister")
         return RedirectResponse("/login/", status_code=status.HTTP_302_FOUND)
 
