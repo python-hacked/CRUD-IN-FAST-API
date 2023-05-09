@@ -49,7 +49,7 @@ JWT_SECRET = 'myjwtsecret'
 
 register_tortoise(
     app,
-    db_url="postgres://postgres:12345@127.0.0.1/crudinfastapi",
+    db_url="postgres://crudapp_to5n_user:Ei0c85cKwFtv6itzv2M2oXEEPV6rqRzu@dpg-chcsa9u7avjcvo4hdb0g-a.singapore-postgres.render.com/crudapp_to5n",
     modules={'models': ['user.models',]},
     generate_schemas=True,
     add_exception_handlers=True
