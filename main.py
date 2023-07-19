@@ -11,11 +11,11 @@ from tortoise.models import Model
 from tortoise import fields
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.middleware import Middleware
-from configs.connection import DATABASE_URL
+# from configs.connection import DATABASE_URL
 from fastapi.middleware.cors import CORSMiddleware
 
 
-db_url = DATABASE_URL()
+# db_url = DATABASE_URL()
 
 middleware = [
     Middleware(SessionMiddleware, secret_key='super-secret')
@@ -49,7 +49,7 @@ JWT_SECRET = 'myjwtsecret'
 
 register_tortoise(
     app,
-    db_url="postgres://crudapp_to5n_user:Ei0c85cKwFtv6itzv2M2oXEEPV6rqRzu@dpg-chcsa9u7avjcvo4hdb0g-a.singapore-postgres.render.com/crudapp_to5n",
+    db_url="postgres://postgres:12345@127.0.0.1/crudinfastapi",
     modules={'models': ['user.models',]},
     generate_schemas=True,
     add_exception_handlers=True

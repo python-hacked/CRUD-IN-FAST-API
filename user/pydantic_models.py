@@ -16,3 +16,13 @@ class Loginuser(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+
+class Userupdate(BaseModel):
+    id : int
+    name : str
+    phone : int
+    email : str
+
+class Get(BaseModel):
+    id:int    
